@@ -20,11 +20,14 @@ import App from "App";
 
 // Soft UI Context Provider
 import { MaterialUIControllerProvider } from "context";
+import { AuthContextProvider } from "context/auth"
 
 ReactDOM.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
-      <App />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
     </MaterialUIControllerProvider>
   </BrowserRouter>,
   document.getElementById("root")

@@ -51,6 +51,7 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import Home from "layouts/home"
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up"
+import { RequireAuth } from "context/auth"
 
 
 export default function App() {
@@ -107,7 +108,7 @@ export default function App() {
       if (route.route) {
         return <Route exact
           path={route.route}
-          element={route.component}
+          element={<RequireAuth>{route.component}</RequireAuth>}
           key={route.key}
         />;
       }
@@ -148,7 +149,7 @@ export default function App() {
         <Route exact path="/authentication/sign-up" element={<SignUp/>} />;
       </Routes>
       {layout === "dashboard" && (
-        <>
+        <RequireAuth>
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
@@ -159,7 +160,7 @@ export default function App() {
           />
           <Configurator />
           {configsButton}
-        </>
+        </RequireAuth>
       )}
       {layout === "vr" && <Configurator />}
       <Routes>

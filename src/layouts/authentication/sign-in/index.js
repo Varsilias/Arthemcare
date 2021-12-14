@@ -36,7 +36,7 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
-import auth from "context/auth"
+// import auth from "context/auth"
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -44,11 +44,12 @@ function Basic() {
   const [password, setPassword] = useState("")
 
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    auth.login(() => navigate('/dashboard', { replace: true }))
+    console.log({
+      username, password
+    })
+    // auth.login(() => navigate('/dashboard', { replace: true }))
   }
 
   const params = useParams();
@@ -85,13 +86,13 @@ function Basic() {
           
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <MDBox component="form" role="form" onSubmit={handleSubmit}>
             <MDBox mb={2}>
               <MDInput
                 type="text"
                 label="Username"
                 fullWidth
-                onChange={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -99,24 +100,24 @@ function Basic() {
                 type="password"
                 label="Password"
                 fullWidth
-                onChange={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </MDBox>
 
             <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+              <Switch checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
               <MDTypography
                 variant="button"
                 fontWeight="regular"
                 color="text"
-                onClick={handleSetRememberMe}
+                onClick={() => setRememberMe(!rememberMe)}
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
                 &nbsp;&nbsp;Remember me
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth onClick={handleLogin}>
+              <MDButton variant="gradient" type="submit" color="info" fullWidth>
                 sign in
               </MDButton>
             </MDBox>

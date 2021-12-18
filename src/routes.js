@@ -42,19 +42,12 @@ import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
+import Logout from "layouts/authentication/logout";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
 
 const routes = [
-  // {
-  //   type: "collapse",
-  //   name: "Home",
-  //   key: "home",
-  //   icon: <Icon fontSize="small">home</Icon>,
-  //   route: "/",
-  //   component: <Home />,
-  // },
   {
     type: "collapse",
     name: "Dashboard",
@@ -94,6 +87,14 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
+  },
+  {
+    type: "collapse",
+    name: "Logout",
+    key: "logout",
+    icon: <Icon fontSize="small">logout</Icon>,
+    route: "/logout",
+    component: <Logout />,
   },
 ];
 

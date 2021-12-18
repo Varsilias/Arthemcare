@@ -1,18 +1,4 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
+/* eslint-disable */
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -35,8 +21,15 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
+import { useAuthContext } from "context/auth";
+
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
+  // const [controller] = useAuthContext();
+
+  // const { user } = controller;
+  // console.log(user);
+  // console.log(controller);
 
   return (
     <DashboardLayout>

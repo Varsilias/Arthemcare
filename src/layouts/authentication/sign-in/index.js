@@ -1,22 +1,8 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 /* eslint-disable */
 import { useState } from "react";
 
 // react-router-dom components
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, Redirect } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -35,25 +21,48 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import { useAuthContext } from "context/auth";
 
-// import auth from "context/auth"
+import axios from "http/api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Basic() {
+  const [controller, dispatch] = useAuthContext();
   const [rememberMe, setRememberMe] = useState(false);
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      username, password
-    })
-    // auth.login(() => navigate('/dashboard', { replace: true }))
-  }
-
+  // const { user } = controller;
   const params = useParams();
   const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log({ username, password});
+    setIsLoading(true);
+    await axios.post('auth/login', {
+        "username": username,  //Prof. Daphnee Ritchie II
+        "password": password    // password
+    }).then((res) => {
+
+      console.log(res.data)
+      setIsLoading(false)
+      dispatch({ type: "SET_USER", user: res.data.user });
+      localStorage.setItem('token', res.data.access_token)
+      toast.success('successfully logged in');
+
+    }).then(() => {
+      navigate('/dashboard')
+    }).catch((error) => console.log(error))
+    // navigate('/')
+  }
+
+  // const { user } = controller;
+  // console.log(user);
+  // console.log(controller);
+
 
   const role = () => {
     if (params.role === "Doctor" || params.role === "Nurse") {
@@ -65,6 +74,19 @@ function Basic() {
 
   return (
     <BasicLayout image={bgImage}>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
+        {/* Same as */}
+      <ToastContainer />
       <Card>
         <MDBox
           variant="gradient"
@@ -117,7 +139,7 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" type="submit" color="info" fullWidth>
+              <MDButton variant="gradient" type="submit" color="info" fullWidth disabled={isLoading}>
                 sign in
               </MDButton>
             </MDBox>

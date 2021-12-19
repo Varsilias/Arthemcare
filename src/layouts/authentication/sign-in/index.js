@@ -40,7 +40,7 @@ function Basic() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, password});
+    // console.log({ username, password});
     setIsLoading(true);
     await axios.post('auth/login', {
         "username": username,  //Prof. Daphnee Ritchie II
@@ -56,12 +56,8 @@ function Basic() {
     }).then(() => {
       navigate('/dashboard')
     }).catch((error) => console.log(error))
-    // navigate('/')
   }
 
-  // const { user } = controller;
-  // console.log(user);
-  // console.log(controller);
 
 
   const role = () => {
@@ -76,8 +72,8 @@ function Basic() {
     <BasicLayout image={bgImage}>
       <ToastContainer
         position="top-right"
-        autoClose={3000}
-        hideProgressBar={true}
+        autoClose={5000}
+        hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}

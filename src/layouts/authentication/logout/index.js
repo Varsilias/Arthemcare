@@ -3,18 +3,18 @@ import { useEffect } from "react"
 import { useAuthContext } from "context/auth";
 import axios from "http/api";
 import { useNavigate, Navigate, Redirect } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
 
 function logout() {
     const [controller, dispatch] = useAuthContext();
-    const token = localStorage.getItem('token');
-    // const navigate = useNavigate();
-    console.log(token);
+    const navigate = useNavigate()
+    // console.log(token);
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         axios.post('auth/logout').then((res) => {
 
@@ -24,12 +24,27 @@ function logout() {
             toast.success('successfully logged out');
 
         }).then(() => {
-            <Navigate to="/" />
+            navigate('/');
         }).catch((error) => console.log(error))
             
     }, [])
     
-    return null;
+    return (
+        <div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                />
+            <ToastContainer />
+        </div>
+    );
 }
 
 export default logout

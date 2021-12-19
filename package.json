@@ -29,6 +29,7 @@
     "axios": "^0.24.0",
     "chart.js": "3.4.1",
     "chroma-js": "2.1.2",
+    "cors-anywhere": "^0.4.4",
     "prop-types": "15.7.2",
     "react": "17.0.2",
     "react-chartjs-2": "3.0.4",
@@ -79,7 +80,5 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "prettier": "2.3.2"
   },
-  
   "proxy": "https://arthemcare-api.herokuapp.com"
-
 }

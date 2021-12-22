@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useAuthContext } from "context/auth";
 import axios from "http/api";
 import { useNavigate, Navigate, Redirect } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -21,7 +21,7 @@ function logout() {
             console.log(res.data)
             localStorage.clear();
             dispatch({ type: "LOGOUT_USER", user: null });
-            toast.success('successfully logged out');
+            toast.success('Successfully logged out');
 
         }).then(() => {
             navigate('/');
@@ -31,18 +31,7 @@ function logout() {
     
     return (
         <div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                />
-            <ToastContainer />
+            
         </div>
     );
 }

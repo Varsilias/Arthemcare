@@ -20,13 +20,9 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-import { useAuthContext, setUser } from "context/auth";
 
 
 function Home() {
-    const [controller, dispatch] = useAuthContext();
-    const { user } = controller;
-    console.log(controller);
 
     return (
         <BasicLayout image={bgImage}>

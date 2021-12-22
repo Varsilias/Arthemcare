@@ -24,7 +24,7 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { useAuthContext } from "context/auth";
 
 import axios from "http/api";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Basic() {
@@ -51,7 +51,7 @@ function Basic() {
       setIsLoading(false)
       dispatch({ type: "SET_USER", user: res.data.user });
       localStorage.setItem('token', res.data.access_token)
-      toast.success('successfully logged in');
+      toast.success('Successfully logged in');
 
     }).then(() => {
       navigate('/dashboard')
@@ -70,19 +70,6 @@ function Basic() {
 
   return (
     <BasicLayout image={bgImage}>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        />
-        {/* Same as */}
-      <ToastContainer />
       <Card>
         <MDBox
           variant="gradient"
@@ -139,7 +126,7 @@ function Basic() {
                 sign in
               </MDButton>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
+            {/* <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
                 Don&apos;t have an account?{" "}
                 <MDTypography
@@ -153,7 +140,7 @@ function Basic() {
                   Sign up
                 </MDTypography>
               </MDTypography>
-            </MDBox>
+            </MDBox> */}
           </MDBox>
         </MDBox>
       </Card>

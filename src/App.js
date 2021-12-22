@@ -52,7 +52,7 @@ import Home from "layouts/home"
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up"
 import { RequireAuth } from "context/auth"
-
+import { ToastContainer } from "react-toastify"
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -143,6 +143,18 @@ export default function App() {
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
+      <ToastContainer
+        theme="dark"
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Routes>
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/auth/:role/sign-in" element={<SignIn/>} />;

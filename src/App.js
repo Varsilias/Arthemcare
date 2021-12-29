@@ -144,7 +144,7 @@ export default function App() {
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
       <ToastContainer
-        theme="dark"
+        // theme="dark"
         position="top-right"
         autoClose={2000}
         hideProgressBar={false}

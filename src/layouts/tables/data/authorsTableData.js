@@ -41,23 +41,30 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
+      { Header: "patient", accessor: "patient", width: "45%", align: "left" },
+      { Header: "gender", accessor: "gender", align: "left" },
+      { Header: "discharged", accessor: "discharged", align: "center" },
+      { Header: "DOB", accessor: "DOB", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
     ],
+    // columns: [
+    //   { Header: "author", accessor: "author", width: "45%", align: "left" },
+    //   { Header: "function", accessor: "function", align: "left" },
+    //   { Header: "status", accessor: "status", align: "center" },
+    //   { Header: "employed", accessor: "employed", align: "center" },
+    //   { Header: "action", accessor: "action", align: "center" },
+    // ],
 
     rows: [
       {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-        function: <Job title="Manager" description="Organization" />,
-        status: (
+        patient: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+        gender: <Job title="Manager" description="Organization" />,
+        discharged: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        DOB: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             23/04/18
           </MDTypography>

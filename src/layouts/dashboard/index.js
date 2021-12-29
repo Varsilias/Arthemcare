@@ -25,11 +25,11 @@ import { useAuthContext } from "context/auth";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
-  // const [controller] = useAuthContext();
+  const [controller] = useAuthContext();
 
   // const { user } = controller;
   // console.log(user);
-  // console.log(controller);
+  console.log(controller);
 
   return (
     <DashboardLayout>

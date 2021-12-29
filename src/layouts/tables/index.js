@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { useEffect, useState } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -18,10 +19,14 @@ import DataTable from "examples/Tables/DataTable";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
+import axios from "http/api"
+
 function Tables() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
-
+  const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -40,7 +45,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Authors Table
+                  Patients
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

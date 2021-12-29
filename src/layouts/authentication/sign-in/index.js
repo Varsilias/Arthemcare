@@ -27,6 +27,9 @@ import axios from "http/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// import { css } from "glamor";
+
+
 function Basic() {
   const [controller, dispatch] = useAuthContext();
   const [rememberMe, setRememberMe] = useState(false);
@@ -50,14 +53,17 @@ function Basic() {
       console.log(res.data)
       setIsLoading(false)
       dispatch({ type: "SET_USER", user: res.data.user });
+      dispatch({ type: "SET_TOKEN", token: res.data.access_token });
+      dispatch({ type: "SET_ROLE", role: res.data.role[0] });
       localStorage.setItem('token', res.data.access_token)
-      toast.success('Successfully logged in');
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      localStorage.setItem('role', res.data.role[0]);
+      toast.success('Successfully logged in')
 
     }).then(() => {
       navigate('/dashboard')
     }).catch((error) => console.log(error))
   }
-
 
 
   const role = () => {

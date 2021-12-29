@@ -2,7 +2,7 @@
 import { useReducer, createContext, useContext } from "react"
 import { useLocation, Navigate } from "react-router-dom"
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 function reducer(state, action) {
     switch (action.type) {
@@ -10,6 +10,10 @@ function reducer(state, action) {
             return { ...state, user: action.user };
         case "LOGOUT_USER": 
             return { ...state, user: action.user };
+        case "SET_TOKEN": 
+            return { ...state, token: action.token };
+        case "SET_ROLE": 
+            return { ...state, role: action.role };
         default: {
             throw new Error(`Unhandled action type: ${action.type}`);
         }
@@ -17,8 +21,11 @@ function reducer(state, action) {
 }
 
 export function AuthContextProvider({ children }) {
+
     const initialState = {
-        user: null
+        user: null ?? JSON.parse(localStorage.getItem('user')),
+        token: null ?? localStorage.getItem('token'),
+        role: null ?? localStorage.getItem('role')
     }
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -48,7 +55,7 @@ export function RequireAuth({ children }) {
         // trying to go to when they were redirected. This allows us to send them
         // along to that page after they login, which is a nicer user experience
         // than dropping them off on the home page.
-        return <Navigate to="/" state={{ from: location, user: user }} />;
+        return <Navigate to="/" state={{ from: location }} />;
     }
 
     return children;

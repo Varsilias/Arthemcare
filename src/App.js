@@ -51,6 +51,12 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import Home from "layouts/home"
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up"
+import AddPatient from "layouts/patients/AddPatient"
+import AddSign from "layouts/patients/AddSign"
+import CaseNote from "layouts/patients/CaseNote"
+import Appointments from "layouts/patients/Appointments"
+import ScheduleAppointment from "layouts/patients/ScheduleAppointment"
+
 import { RequireAuth } from "context/auth"
 import { ToastContainer } from "react-toastify"
 
@@ -157,8 +163,14 @@ export default function App() {
       />
       <Routes>
         <Route exact path="/" element={<Home/>} />
-        <Route exact path="/auth/:role/sign-in" element={<SignIn/>} />;
-        <Route exact path="/authentication/sign-up" element={<SignUp/>} />;
+        <Route exact path="/auth/:role/sign-in" element={<SignIn/>} />
+        <Route exact path="/authentication/sign-up" element={<SignUp/>} />
+        <Route exact path="/patients/add" element={<RequireAuth>{<AddPatient/>}</RequireAuth>} />
+        <Route exact path="/patients/health/add" element={<RequireAuth>{<AddSign/>}</RequireAuth>} />
+        <Route exact path="/patients/case-note/:id" element={<RequireAuth>{<CaseNote/>}</RequireAuth>} />
+        <Route exact path="/doctor/appointments" element={<RequireAuth>{<Appointments/>}</RequireAuth>} />
+        <Route exact path="/appointments/schedule" element={<RequireAuth>{<ScheduleAppointment/>}</RequireAuth>} />
+
       </Routes>
       {layout === "dashboard" && (
         <RequireAuth>
@@ -171,7 +183,7 @@ export default function App() {
             onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
-          {configsButton}
+          {/* {configsButton} */}
         </RequireAuth>
       )}
       {layout === "vr" && <Configurator />}

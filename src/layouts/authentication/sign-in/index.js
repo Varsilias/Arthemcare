@@ -46,7 +46,7 @@ function Basic() {
     // console.log({ username, password});
     setIsLoading(true);
     await axios.post('auth/login', {
-        "username": username,  //Prof. Daphnee Ritchie II
+        "username": username,  // Varsilias
         "password": password    // password
     }).then((res) => {
 
@@ -61,7 +61,7 @@ function Basic() {
       toast.success('Successfully logged in')
 
     }).then(() => {
-      navigate('/dashboard')
+      navigate('/patients')
     }).catch((error) => console.log(error))
   }
 

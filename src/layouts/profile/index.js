@@ -1,5 +1,6 @@
 /* eslint-disable */
-
+import { cloneElement } from "react"
+import { Link } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
@@ -23,7 +24,7 @@ import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
 import Header from "layouts/profile/components/Header";
-// import PlatformSettings from "layouts/profile/components/PlatformSettings";
+import PlatformSettings from "layouts/profile/components/PlatformSettings";
 
 // Data
 import profilesListData from "layouts/profile/data/profilesListData";
@@ -38,18 +39,103 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
 import { useAuthContext } from "context/auth"
 
 function Overview() {
+
+
   const [controller] = useAuthContext();
   const { user, role } = controller;
-  console.log(user)
+  console.log(role)
   const showRole = (role) => {
     if(role == "Doctor") {
       return "Dr.";
     }
 
     return '';
+  }
+
+  const doctorActions = [
+    {
+      text: "View Appointment History",
+      link: "/doctor/appointments"
+    }
+  ]
+
+  const nurseActions = [
+    {
+      text: "Add Patient's Vital Signs",
+      link: "/patients/add"
+    }
+  ]
+
+  const staffActions = [
+    {
+      text: "Schedule Appointment",
+      link: "/patients/add"
+    }
+  ]
+
+  const renderAction = (role) => {
+    if(role === "Doctor") {
+      doctorActions.map(({ text, link }) => (
+        <ListItem>
+          <ListItemText>
+            <MDTypography
+              component={Link}
+              to={link}
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+            >
+              {text}
+            </MDTypography>
+          </ListItemText>
+        </ListItem>
+        
+      ));
+    } else if(role === "Nurse") {
+      nurseActions.map(({ text, link }) => (
+        <ListItem>
+          <ListItemText>
+            <MDTypography
+              component={Link}
+              to={link}
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+            >
+              {text}
+            </MDTypography>
+          </ListItemText>
+        </ListItem>
+      ));
+    } else {
+      staffActions.map(({ text, link }) => (
+        <ListItem>
+          <ListItemText>
+            <MDTypography
+              component={Link}
+              to={link}
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+            >
+              {text}
+            </MDTypography>
+          </ListItemText>
+        </ListItem>
+      ));
+    }
   }
 
   return (
@@ -62,7 +148,7 @@ function Overview() {
             {/* <Grid item xs={12} md={6} xl={4}>
               <PlatformSettings />
             </Grid> */}
-            <Grid item xs={12} md={6} xl={4} sx={{ display: "flex" }}>
+            <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
 
               <ProfileInfoCard
@@ -74,7 +160,7 @@ function Overview() {
                   email: `${user.email}`,
                   username: `${user.username}`,
                   gender: `${user.gender}`,
-                  speciality: `${user.speciality}` ?? 'None'
+                  speciality: 'None' ?? `${user.speciality}`
                 }}
                 social={[
                   {
@@ -98,9 +184,25 @@ function Overview() {
               />
               <Divider orientation="vertical" sx={{ mx: 0 }} />
             </Grid>
-            {/* <Grid item xs={12} xl={4}>
-              <ProfilesList title="conversations" profiles={profilesListData} shadow={false} />
-            </Grid> */}
+            <Grid item xs={12} md={6} xl={6}>
+              <List>
+                <ListItem>
+                  <ListItemText>
+                    <MDTypography
+                      component={Link}
+                      to="/patients"
+                      variant="button"
+                      color="info"
+                      fontWeight="medium"
+                      textGradient
+                    >
+                      action
+                    </MDTypography>
+                  </ListItemText>
+                </ListItem>
+              </List>
+            </Grid>
+
           </Grid>
         </MDBox>
         {/* <MDBox pt={2} px={2} lineHeight={1.25}>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -13,12 +13,6 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-// import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
-
-// Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -30,24 +24,25 @@ import Paper from '@mui/material/Paper';
 
 import axios from "http/api"
 
-function Tables() {
-
-  const [patients, setPatients] = useState([]);
+function Appointments() {
+  const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
   useEffect(() => {
-    const fetchPatients = async () => {
+    const getAppointments = async () => {
       setLoading(true)
-      const response = await axios.get('/patients');
+      const response = await axios.get('/appointments');
       const data = await response.data.data;
-      setPatients(data)
+      setAppointments(data)
       setLoading(false)
       console.log(data)
       return data;
     }
 
-    fetchPatients()
-  }, [setPatients])
+    getAppointments()
+
+  }, [setAppointments])
+  
   
   return (
     <DashboardLayout>
@@ -67,48 +62,40 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Patients
+                  Appointments
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
-                { loading ? (<MDTypography variant="h6" color="info" mx={3} my={3}>Fetching Patients, Please wait...</MDTypography>)
-                : <TableContainer component={Paper}>
+                {loading ? (<MDTypography variant="h6" color="info" mx={3} my={3}>Fetching Appointments, Please wait...</MDTypography>)
+                :<TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     {/* <TableHead style={{ width: "100%" }}> */}
                       <TableRow>
-                        <TableCell style={{ color: "black", fontWeight: "bold" }}>Firstname</TableCell>
-                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Lastname</TableCell>
-                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Gender</TableCell>
-                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Ward No.</TableCell>
-                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Discharged</TableCell>
-                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Case Notes</TableCell>
+                        <TableCell style={{ color: "black", fontWeight: "bold" }}>Patient</TableCell>
+                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Scheduled Time</TableCell>
+                        <TableCell align="right" style={{ color: "black", fontWeight: "bold" }}>Ward No.</TableCell>                        
                       </TableRow>
                     {/* </TableHead> */}
                     <TableBody>
-                      {patients.map((patient) => (
+                      {appointments.map((appointment) => (
                         <TableRow
-                          key={patient.id}
+                          key={appointment.id}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell component="th" scope="row">
-                            {patient.firstname}
-                          </TableCell>
-                          <TableCell align="right">{patient.lastname}</TableCell>
-                          <TableCell align="right">{patient.gender}</TableCell>
-                          <TableCell align="right">{patient.ward_no}</TableCell>
-                          <TableCell align="right">{patient.discharged ? "Yes" : "No"}</TableCell>
-                          <TableCell align="right">
                             <MDTypography
                               component={Link}
-                              to={`/patients/case-note/${patient.id}`}                              
+                              to={`/patients/case-note/${appointment.patient.id}`}
                               variant="button"
                               color="info"
                               fontWeight="medium"
                               textGradient
                             >
-                              View
+                              {`${appointment.patient.firstname} ${appointment.patient.lastname}`}
                             </MDTypography>
                           </TableCell>
+                          <TableCell align="right">{new Date(appointment.scheduled_at).toDateString()}</TableCell>
+                          <TableCell align="right">{appointment.patient.ward_no}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -119,9 +106,8 @@ function Tables() {
           </Grid>
         </Grid>
       </MDBox>
-      {/* <Footer /> */}
     </DashboardLayout>
   );
 }
 
-export default Tables;
+export default Appointments;

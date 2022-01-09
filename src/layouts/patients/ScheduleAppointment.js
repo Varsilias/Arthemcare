@@ -27,8 +27,11 @@ function ScheduleAppointment() {
   const [loading, setLoading] = useState(false);
   const [patientLoading, setPatientLoading] = useState(false)
   const [patients, setPatients] = useState([])
+  const [doctors, setDoctors] = useState([])
   const [scheduledAt, setScheduledAt] = useState("");
   const [patientId, setPatientId] = useState("")
+  const [doctorId, setDoctorId] = useState("")
+
 
 
 
@@ -43,21 +46,34 @@ function ScheduleAppointment() {
       return data;
     }
 
+    const fetchDoctors = async () => {
+      setPatientLoading(true)
+      const response = await axios.get('/auth/doctors');
+      const data = await response.data.doctors;
+      setDoctors(data)
+      setPatientLoading(false)
+      // console.log(data)
+      return data;
+    }
+
+    fetchDoctors()
     fetchPatients()
-  }, [setPatients])
+  }, [setPatients, setDoctors])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
-    console.log(patientId, scheduledAt)
-    // const response = await axios.post(`/appointments/${patientId}`, {
-    //   scheduled_at: scheduledAt, 
-    // })
-    // const { message } = response.data;
-    // toast.success(`${message}`)
-    // setLoading(false)
-    // setScheduledAt("")
-    // setPatientId("")
+    console.log(patientId, scheduledAt, doctorId)
+    const response = await axios.post(`/appointments/${patientId}`, {
+      scheduled_at: scheduledAt,
+      user_id: doctorId
+    })
+    const { message } = response.data;
+    toast.success(`${message}`)
+    setLoading(false)
+    setScheduledAt("")
+    setPatientId("")
+    setDoctorId("")
 
   }
 
@@ -120,6 +136,25 @@ function ScheduleAppointment() {
                     </TextField>}
                   </MDBox>
 
+                  <MDBox mb={2}>
+                    {doctors && <TextField
+                      id="standard-select-currency"
+                      select
+                      label="Select Doctor"
+                      value={doctorId}
+                      onChange={(e) => setDoctorId(e.target.value)}
+                      helperText="Please choose a Doctor"
+                      variant="standard"
+                      fullWidth
+                    >
+                      {doctors.map((doctor) => (
+                        <MenuItem key={doctor.id} value={doctor.id}>
+                          {`${doctor.firstname} ${doctor.lastname}`}
+                        </MenuItem>
+                      ))}
+                    </TextField>}
+                  </MDBox>
+ 
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" type="submit" color="info" fullWidth disabled={loading}>
                       Schedule

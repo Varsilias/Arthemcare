@@ -61,7 +61,7 @@ function Basic() {
       toast.success('Successfully logged in')
 
     }).then(() => {
-      navigate('/dashboard')
+      navigate('/patients')
     }).catch((error) => console.log(error))
   }
 

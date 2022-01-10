@@ -38,16 +38,17 @@ function Tables() {
   useEffect(() => {
     const fetchPatients = async () => {
       setLoading(true)
-      const response = await axios.get('/patients');
-      const data = await response.data.data;
+      const response = await axios.get('/patients')
+      const data = await response.data.data
       setPatients(data)
       setLoading(false)
       console.log(data)
-      return data;
+      return data
     }
 
     fetchPatients()
   }, [setPatients])
+  
   
   return (
     <DashboardLayout>

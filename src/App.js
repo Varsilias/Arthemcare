@@ -168,7 +168,7 @@ export default function App() {
         <Route exact path="/patients/add" element={<RequireAuth>{<AddPatient/>}</RequireAuth>} />
         <Route exact path="/patients/health/add" element={<RequireAuth>{<AddSign/>}</RequireAuth>} />
         <Route exact path="/patients/case-note/:id" element={<RequireAuth>{<CaseNote/>}</RequireAuth>} />
-        <Route exact path="/doctor/appointments" element={<RequireAuth>{<Appointments/>}</RequireAuth>} />
+        <Route exact path="/appointments" element={<RequireAuth>{<Appointments/>}</RequireAuth>} />
         <Route exact path="/appointments/schedule" element={<RequireAuth>{<ScheduleAppointment/>}</RequireAuth>} />
 
       </Routes>

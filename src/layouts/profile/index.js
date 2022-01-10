@@ -64,28 +64,33 @@ function Overview() {
   const doctorActions = [
     {
       text: "View Appointment History",
-      link: "/doctor/appointments"
+      link: "/appointments"
     }
   ]
 
   const nurseActions = [
     {
       text: "Add Patient's Vital Signs",
-      link: "/patients/add"
+      link: "/patients/health/add"
     }
   ]
 
   const staffActions = [
     {
-      text: "Schedule Appointment",
+      text: "Add New Patient",
       link: "/patients/add"
+    },
+
+    {
+      text: "Schedule Appointment",
+      link: "/appointments/schedule"
     }
   ]
 
   const renderAction = (role) => {
     if(role === "Doctor") {
-      doctorActions.map(({ text, link }) => (
-        <ListItem>
+      return doctorActions.map(({ text, link }) => (
+        <ListItem key={link}>
           <ListItemText>
             <MDTypography
               component={Link}
@@ -102,11 +107,12 @@ function Overview() {
         
       ));
     } else if(role === "Nurse") {
-      nurseActions.map(({ text, link }) => (
-        <ListItem>
+      return nurseActions.map(({ text, link }) => (
+        <ListItem key={link}>
           <ListItemText>
             <MDTypography
               component={Link}
+              key={link}
               to={link}
               variant="button"
               color="info"
@@ -119,11 +125,12 @@ function Overview() {
         </ListItem>
       ));
     } else {
-      staffActions.map(({ text, link }) => (
-        <ListItem>
+      return staffActions.map(({ text, link }) => (
+        <ListItem key={link}>
           <ListItemText>
             <MDTypography
               component={Link}
+              key={link}
               to={link}
               variant="button"
               color="info"
@@ -186,20 +193,7 @@ function Overview() {
             </Grid>
             <Grid item xs={12} md={6} xl={6}>
               <List>
-                <ListItem>
-                  <ListItemText>
-                    <MDTypography
-                      component={Link}
-                      to="/patients"
-                      variant="button"
-                      color="info"
-                      fontWeight="medium"
-                      textGradient
-                    >
-                      action
-                    </MDTypography>
-                  </ListItemText>
-                </ListItem>
+                {renderAction(role)}
               </List>
             </Grid>
 

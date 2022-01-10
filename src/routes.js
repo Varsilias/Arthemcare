@@ -31,18 +31,20 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import Logout from "layouts/authentication/logout";
 
+// import Appointments from "layouts/patients/Appointments"
+
 // @mui icons
 import Icon from "@mui/material/Icon";
 
 const routes = [
-  {
-    type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
-    component: <Dashboard />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Dashboard",
+  //   key: "dashboard",
+  //   icon: <Icon fontSize="small">dashboard</Icon>,
+  //   route: "/dashboard",
+  //   component: <Dashboard />,
+  // },
   {
     type: "collapse",
     name: "Patients",
@@ -75,6 +77,7 @@ const routes = [
     route: "/profile",
     component: <Profile />,
   },
+
   {
     type: "collapse",
     name: "Logout",

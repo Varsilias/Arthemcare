@@ -110,7 +110,7 @@ function CaseNote() {
               <Divider orientation="vertical" sx={{ mx: 0 }} />
             </Grid>
 
-            <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
+            {nextOfKin && <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
 
               <ProfileInfoCard
@@ -145,9 +145,9 @@ function CaseNote() {
               />
               
               <Divider orientation="vertical" sx={{ mx: 0 }} />
-            </Grid>
+            </Grid>}
 
-            <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
+            {healthRecord && <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
 
               <ProfileInfoCard
@@ -183,9 +183,9 @@ function CaseNote() {
               />
               
               <Divider orientation="vertical" sx={{ mx: 0 }} />
-            </Grid>
+            </Grid>}
 
-            <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
+            {prescription && <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
 
               <ProfileInfoCard
@@ -203,9 +203,9 @@ function CaseNote() {
               />
               
               <Divider orientation="vertical" sx={{ mx: 0 }} />
-            </Grid>
+            </Grid>}
 
-            <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
+            {appointment && <Grid item xs={12} md={6} xl={6} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
 
               <ProfileInfoCard
@@ -222,7 +222,7 @@ function CaseNote() {
               />
               
               <Divider orientation="vertical" sx={{ mx: 0 }} />
-            </Grid>
+            </Grid>}
 
           </Grid>}
         </MDBox>

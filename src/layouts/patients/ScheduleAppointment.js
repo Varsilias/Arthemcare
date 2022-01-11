@@ -149,7 +149,7 @@ function ScheduleAppointment() {
                     >
                       {doctors.map((doctor) => (
                         <MenuItem key={doctor.id} value={doctor.id}>
-                          {`${doctor.firstname} ${doctor.lastname}`}
+                          {`Dr. ${doctor.firstname} ${doctor.lastname}`}
                         </MenuItem>
                       ))}
                     </TextField>}
